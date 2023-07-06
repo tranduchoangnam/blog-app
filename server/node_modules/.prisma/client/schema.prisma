@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User{
+  id String @id
+  order Int @default(autoincrement())
+  email String?
+  photo String?
+  name String
+  bio String?
+  
+  blog Blog[]
+  history History[]
+  comment Comment[]
+  upvote Upvote[]
+  downvote Downvote[]
+  share Share[]
+  followedBy Follow[] @relation("following")
+  following  Follow[] @relation("follower")
+}
+model Blog{
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  tags String[]
+  photo String
+  date DateTime @default(now())
+  upvoted Boolean @default(false)
+  downvoted Boolean @default(false)
+
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  upvote Upvote[]
+  downvote Downvote[]
+  share Share[]
+  comment Comment[]
+  history History[]
+}
+model Upvote{
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  blogId Int
+  blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+  @@id([userId,blogId])
+}
+model Downvote{
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  blogId Int
+  blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+  @@id([userId,blogId])
+}
+model Share{
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  blogId Int
+  blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+  @@id([userId,blogId])
+}
+model Comment{
+  id Int @id @default(autoincrement())
+  content String
+  date DateTime @default(now())
+  liked Boolean @default(false)
+  like_count Int @default(0)
+
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  blogId Int
+  blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+}
+
+model History{
+  // id Int @id @default(autoincrement())
+  date DateTime @default(now())
+
+  userId String
+  user User @relation(fields:[userId],references: [id],onDelete: Cascade)
+  blogId Int
+  blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+  @@id([userId,blogId])
+}
+model Follow{
+  follower    User @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+}
+
+
+// model Frame{
+//   id String 
+//   userId String
+
+//   faces Face[]
+//   user User @relation(fields: [userId], references: [id],onDelete: Cascade)
+//   @@id ([id,userId])
+// }
+// model Face{
+//   id Int @id @default(autoincrement())
+//   value String
+//   path String
+//   frameId String
+//   userId String
+//   frame Frame @relation(fields: [frameId,userId], references: [id,userId],onDelete: Cascade)
+// }
+ 
