@@ -64,14 +64,16 @@ i {
 ::placeholder {
   color: black;
 }
-.search_box input {
+input {
   background-color: var(--grey-color);
   width: 100%;
+  height: 100%;
   font-size: 20px;
   border: none;
-  outline: none;
+  /* outline: none; */
   color: black;
 }
+
 .brand {
   position: absolute;
   left: 20px;
@@ -96,7 +98,9 @@ i {
 }
 .btn_login,
 .btn_read,
-.btn_edit {
+.btn_edit,
+.btn_post,
+.tag-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,6 +233,7 @@ i {
   height: 40px;
   font-size: 15px;
 }
+
 .login_body .element {
   margin-bottom: 20px;
 }
@@ -333,6 +338,70 @@ i {
   background-color: white;
   color: var(--green-color);
   border: var(--green-color) 1px solid;
+}
+/* Upload */
+.wrapper_post {
+  position: relative;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+.container_post,
+.text_editor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 700px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+.title input {
+  padding: 10px;
+  background-color: white;
+}
+.title input::placeholder {
+  color: grey;
+}
+.text_editor {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.btn_post {
+  width: 100px;
+  height: 100%;
+}
+.tags {
+  flex-direction: column;
+}
+.tags-list {
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.tag-item {
+  width: auto;
+  background-color: grey;
+  position: relative;
+  justify-content: space-between;
+  margin-right: 5px;
+}
+.tag-item .text {
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 1000px) {

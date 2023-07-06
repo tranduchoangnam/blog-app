@@ -1,6 +1,6 @@
 import Bar from "../components/Bar";
 import Header from "../components/Header";
-import Main from "../components/Main";
+import Blog from "../components/Blog";
 
 function Home() {
   return (
@@ -9,7 +9,9 @@ function Home() {
       <div>
         <Header />
         <Bar />
-        <Main />
+        <div className="wrapper_right">
+          <Blog />
+        </div>
       </div>
     </>
   );

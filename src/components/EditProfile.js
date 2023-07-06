@@ -1,12 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
-const UserProfile = () => {
+const EditProfile = ({ setShowEdit }) => {
   const { user } = useGlobalContext();
-  const navigate = useNavigate();
+  const handleShowEdit = (e) => {
+    setShowEdit(e);
+  };
+
   return (
     <div className="theme">
-      <div className="user_profile">
+      <div className="wrapper_edit">
         <div className="user_avatar">
           <img src={user.photo} alt="" />
         </div>
@@ -15,9 +18,10 @@ const UserProfile = () => {
             <h3>{user.email ? user.email : user.id}</h3>
           </div>
           <div className="user_name">{user.name}</div>
-          <button className="btn_edit" onClick={() => navigate("/edit")}>
-            Edit Profile
-          </button>
+          <i
+            className="bx bx-x-circle btn_close"
+            onClick={() => handleShowEdit(false)}
+          ></i>
         </div>
       </div>
       <div className="blog"></div>
@@ -25,4 +29,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default EditProfile;

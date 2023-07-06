@@ -26,7 +26,7 @@ const Bar = () => {
         <i className="bx bxs-compass"></i>
         <p>Explore</p>
       </div>
-      <div className="Post" onClick={() => handleClick("/")}>
+      <div className="Post" onClick={() => handleClick("/upload")}>
         <i className="bx bxs-message-add"></i>
         <p>Post</p>
       </div>
