@@ -10,7 +10,18 @@ function Home() {
         <Header />
         <Bar />
         <div className="wrapper_right">
-          <Blog />
+          <div className="container_grid">
+            <Blog
+              title="so so lead alsjdfkljaslkdjfkasjkflasjdkf"
+              imgSrc="https://picsum.photos/200/100"
+            />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+            <Blog title="so so lead" imgSrc="https://picsum.photos/200/100" />
+          </div>
         </div>
       </div>
     </>

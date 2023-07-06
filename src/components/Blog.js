@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-const Blog = () => {
+const Blog = ({ title, imgSrc }) => {
   const navigate = useNavigate();
   return (
     <div className="blog">
@@ -16,9 +16,11 @@ const Blog = () => {
         </div>
       </div>
       <div className="blog_content">
-        <div className="title">OMG</div>
-        <div className="time"></div>
-        <img src="" alt="" />
+        <div className="title">{title}</div>
+        <div className="time">Now</div>
+        <div className="image">
+          <img src={imgSrc} alt="" />
+        </div>
       </div>
       <div className="blog_footer">
         <i className="bx bxs-upvote"></i>
