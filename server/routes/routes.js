@@ -7,7 +7,7 @@ import history from "../services/history.js";
 
 import dotenv from "dotenv";
 dotenv.config();
-
+const a = 2;
 const successLoginUrl = `${process.env.FRONTEND_URL}/login/success`;
 const failureLoginUrl = `${process.env.FRONTEND_URL}/login/error`;
 
