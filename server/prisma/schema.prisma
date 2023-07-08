@@ -16,6 +16,8 @@ model User{
   photo String?
   name String
   bio String?
+  created_at String
+  updated_at String?
   
   blog Blog[]
   history History[]
@@ -32,9 +34,7 @@ model Blog{
   content String
   tags String[]
   photo String
-  date DateTime @default(now())
-  upvoted Boolean @default(false)
-  downvoted Boolean @default(false)
+  date String
 
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
@@ -59,6 +59,8 @@ model Downvote{
   @@id([userId,blogId])
 }
 model Share{
+  date String
+
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
   blogId Int
@@ -68,9 +70,7 @@ model Share{
 model Comment{
   id Int @id @default(autoincrement())
   content String
-  date DateTime @default(now())
-  liked Boolean @default(false)
-  like_count Int @default(0)
+  date String
 
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
@@ -80,7 +80,7 @@ model Comment{
 
 model History{
   // id Int @id @default(autoincrement())
-  date DateTime @default(now())
+  date String
 
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)

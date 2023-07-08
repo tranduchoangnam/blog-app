@@ -1,17 +1,28 @@
 import express from "express";
-const router = express.Router();
 import passport from "passport";
-import upload_process from "../services/upload_process.js";
 import isUserAuthenticated from "../middlewares/checkAuth.js";
-import history from "../services/history.js";
-
+import upload from "../middlewares/upload.js";
+import {
+  createUser,
+  getUserProfile,
+  updateUser,
+  deleteUser,
+} from "../controllers/user.js";
+import {
+  createBlog,
+  deleteBlog,
+  getBlog,
+  updateBlog,
+  getNewestBlogs,
+} from "../controllers/blog.js";
+import { getHistory } from "../controllers/history.js";
+import { getFollowingBlogs } from "../controllers/follow.js";
 import dotenv from "dotenv";
+
 dotenv.config();
-const a = 2;
+const router = express.Router();
 const successLoginUrl = `${process.env.FRONTEND_URL}/login/success`;
 const failureLoginUrl = `${process.env.FRONTEND_URL}/login/error`;
-
-router.post("/upload", isUserAuthenticated, upload_process);
 
 router.get("/", (req, res) => {
   res.send("Hello ?");
@@ -31,28 +42,29 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
+    failureMessage: "Cannot login to Google",
     successRedirect: successLoginUrl,
     failureRedirect: failureLoginUrl,
   }),
   (req, res) => {
-    res.send("LoggedIn");
+    // res.send("LoggedIn");
   }
 );
-router.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", {
-    authType: "reauthenticate",
-    scope: ["public_profile", "email"],
-  })
-);
+// router.get(
+//   "/auth/facebook",
+//   passport.authenticate("facebook", {
+//     authType: "reauthenticate",
+//     scope: ["public_profile", "email"],
+//   })
+// );
 
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", {
-    successRedirect: "/api/current_user",
-    failureRedirect: "/auth/facebook/failure",
-  })
-);
+// router.get(
+//   "/auth/facebook/callback",
+//   passport.authenticate("facebook", {
+//     successRedirect: "/api/current_user",
+//     failureRedirect: "/auth/facebook/failure",
+//   })
+// );
 router.delete("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
@@ -64,9 +76,6 @@ router.delete("/logout", (req, res, next) => {
     res.send("Logged out");
   });
 });
-router.get("/api/current_user", isUserAuthenticated, (req, res) => {
-  res.json(req.user);
-});
 
 router.get("/auth/google/failure", (req, res) => {
   res.send("Failed to authenticate..");
@@ -74,5 +83,26 @@ router.get("/auth/google/failure", (req, res) => {
 router.get("/auth/facebook/failure", (req, res) => {
   res.send("Failed to authenticate..");
 });
-router.get("/api/getHistory", isUserAuthenticated, history.getHistory);
+
+router.get("/api/public_user/:userId", (req, res) => {
+  res.json(getUser(req.params.userId));
+});
+
+router.post("/api/create_user", createUser);
+router.put("/api/update_user", isUserAuthenticated, updateUser);
+router.delete("/api/delete_user", isUserAuthenticated, deleteUser);
+router.get("/api/current_user", isUserAuthenticated, (req, res) => {
+  res.json(req.user);
+});
+
+router.get("/api/home", getNewestBlogs);
+router.get("/api/dashboard/:user_id", getUserProfile);
+router.get("/api/following", isUserAuthenticated, getFollowingBlogs);
+router.get("api/history", isUserAuthenticated, getHistory);
+
+router.get("/api/create_blog", isUserAuthenticated, createBlog);
+router.get("/api/get_blog/:blogId", getBlog);
+router.delete("/api/delete_blog/:blogId", isUserAuthenticated, deleteBlog);
+router.put("/api/update_blog/:blogId", isUserAuthenticated, updateBlog);
+router.post("/api/upload", isUserAuthenticated, upload);
 export { router };

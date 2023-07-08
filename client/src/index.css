@@ -29,7 +29,7 @@ i {
   position: fixed;
   border-bottom: 1px solid var(--border-color);
   width: 100%;
-  position: fixed;
+  background-color: white;
   top: 0;
   height: 70px;
   align-items: center;
@@ -324,19 +324,25 @@ input {
 }
 .blog_content {
   flex-direction: column;
-  justify-content: center;
-  height: 220px;
+  justify-content: flex-start;
 }
 /* .image img {
   object-fit: contain;
 } */
 .image {
   width: 100%;
-  height: 100%;
+  height: 160px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.scroll_content {
+  flex-direction: column;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  overflow-y: auto;
 }
 .image img {
   width: 100%;
@@ -344,13 +350,14 @@ input {
 }
 .blog {
   max-width: 300px;
+  height: 400px;
   background-color: white;
   border-radius: 10px;
   margin-bottom: 20px;
   border: 1px solid var(--border-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
   padding: 20px;
 }
 
@@ -377,22 +384,23 @@ input {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
+  padding: 20px;
   width: 100%;
-  margin-top: 20px;
   justify-items: center;
+  border: 1px solid var(--border-color);
 }
 /* Upload */
+
 .wrapper_post {
   position: relative;
   margin-top: 70px;
   display: flex;
-  flex-direction: column;
   background-color: white;
   color: black;
   width: 100vw;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 20px;
+  flex-wrap: wrap;
   /* border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
@@ -401,7 +409,6 @@ input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   width: 700px;
 }
 
@@ -421,6 +428,16 @@ input {
   display: flex;
   flex-direction: column;
   height: auto;
+}
+.cover_photo {
+  padding: 0 10px;
+  color: grey;
+  font-size: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cover_photo input {
+  width: 300px;
 }
 .btn_post {
   width: 100px;
@@ -446,6 +463,12 @@ input {
   margin-right: 5px;
 }
 
+/*Full Blog*/
+.full {
+  max-width: 800px;
+  max-height: none;
+  height: auto;
+}
 @media screen and (max-width: 1250px) {
   .wrapper_left {
     width: 90px;

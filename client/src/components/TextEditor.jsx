@@ -3,7 +3,7 @@ import JoditEditor from "jodit-react";
 
 export default function TextEditor({ setContentData }) {
   const editor = useRef(null);
-  const [content, setContent] = useState("Start writing");
+  const [content, setContent] = useState("");
   const config = {
     readonly: false,
     width: 700,

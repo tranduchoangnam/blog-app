@@ -4,16 +4,26 @@ import http from "http";
 import passport from "passport";
 import { router } from "./routes/routes.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import path, { dirname } from "path";
 // import keys from "./auth/key.js";
 import middlewares from "./middlewares/errors.js";
 // import cookieSession from "cookie-session";
 import cors from "cors";
 import "./auth/passport.js";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 8000;
 // app.set("trust proxy", 1);
 
 const server = http.createServer(app);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use("/uploads", express.static(path.join(__dirname, "server/uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use(cookieParser());
 app.use(

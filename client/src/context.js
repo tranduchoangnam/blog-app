@@ -41,13 +41,7 @@ const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    const storedUser = Cookies.get("user");
-    if (storedUser) {
-      saveUser(JSON.parse(storedUser));
-      setIsLoading(false);
-    } else fetchUser();
-  }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -56,6 +50,7 @@ const UserProvider = ({ children }) => {
         fetchUser,
         user,
         logoutUser,
+        setIsLoading,
       }}
     >
       {children}

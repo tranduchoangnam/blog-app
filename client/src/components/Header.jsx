@@ -43,7 +43,10 @@ const Header = () => {
         {loginShow && <Login setLoginShow={setLoginShow} />}
         {toggleLog && (
           <div className="log_list">
-            <div className="element" onClick={() => handleClick("/dashboard")}>
+            <div
+              className="element"
+              onClick={() => handleClick(`/dashboard/${user.id}`)}
+            >
               <i className="bx bxs-user"></i>
               <p>View profile</p>
             </div>
