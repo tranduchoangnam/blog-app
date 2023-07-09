@@ -1,6 +1,5 @@
 import Bar from "../components/Bar";
 import Header from "../components/Header";
-import Blog from "../components/Blog";
 import { useEffect, useState } from "react";
 import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";

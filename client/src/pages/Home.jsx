@@ -1,15 +1,12 @@
 import Bar from "../components/Bar";
 import Header from "../components/Header";
-import Blog from "../components/Blog";
 import { useEffect, useState } from "react";
 import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
 import BlogList from "../components/BlogList";
-import { useNavigate } from "react-router-dom";
 function Home() {
   const [data, setData] = useState();
-  const navigate = useNavigate();
   useEffect(() => {
     document.title = "Blogee";
 

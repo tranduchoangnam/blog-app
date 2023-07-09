@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleData, handleTitle } from "../utils/handleData.js";
 import { useGlobalContext } from "../context";
@@ -15,12 +15,9 @@ const Blog = ({ data, type }) => {
     if (!type.enable) return;
     if (!user) navigate("/login");
     try {
-      const response = await axios.get(
-        `${backendURL}/api/react/view/${data.blog.id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.get(`${backendURL}/api/react/view/${data.blog.id}`, {
+        withCredentials: true,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -65,12 +62,9 @@ const Blog = ({ data, type }) => {
 
     if (!user) navigate("/login");
     try {
-      const response = await axios.delete(
-        `${backendURL}/api/delete_blog/${data.blog.id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.delete(`${backendURL}/api/delete_blog/${data.blog.id}`, {
+        withCredentials: true,
+      });
       setDeleted(true);
     } catch (error) {
       console.log(error);

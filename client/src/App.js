@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   Home,
-  Error,
   Dashboard,
   ProtectedRoute,
   UploadPage,
@@ -13,7 +12,7 @@ import {
 import { useGlobalContext } from "./context";
 import Skeleton from "./components/Skeleton";
 import Login from "./components/Login";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Cookies from "js-cookie";
 
 function App() {

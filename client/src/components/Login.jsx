@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import backendURL from "../utils/backendUrl";
 import PasswordAndConfirmPasswordValidation from "../utils/PasswordAndConfirmPasswordValidation";

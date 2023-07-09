@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import backendURL from "./utils/backendUrl";
 import Cookies from "js-cookie";
 

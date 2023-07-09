@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "deploy": "npx prisma migrate deploy && npm start"
   },
   "keywords": [],
   "author": "",
@@ -31,12 +32,10 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
+    "prisma": "4.13",
     "sharp": "^0.31.0",
     "util": "^0.12.5",
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13"
-  },
-  "devDependencies": {
-    "prisma": "^4.16.2"
   }
 }

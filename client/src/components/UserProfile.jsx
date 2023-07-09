@@ -1,5 +1,4 @@
 import React from "react";
-import { useGlobalContext } from "../context";
 import EditProfile from "./EditProfile";
 import BlogList from "./BlogList";
 import { useState } from "react";

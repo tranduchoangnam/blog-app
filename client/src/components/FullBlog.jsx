@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useGlobalContext } from "../context";
 import { handleData } from "../utils/handleData";
 import axios from "axios";
@@ -60,6 +60,7 @@ const FullBlog = ({ data, type }) => {
           <div className="user_profile">
             <div className="user_avatar">
               <img
+                alt="avatar"
                 src={data.owner.photo}
                 onClick={() => navigate(`/dashboard/${data.owner.id}`)}
               />
@@ -67,7 +68,11 @@ const FullBlog = ({ data, type }) => {
             <div className="user_info">
               <h3>{data.owner.email ? data.owner.email : data.owner.id}</h3>
               <h5>{data.owner.name}</h5>
-              {user.id !== data.owner.id ? <>{followButton}</> : <></>}
+              {!user ? (
+                followButton
+              ) : (
+                <>{user.id !== data.owner.id ? <>{followButton}</> : <></>}</>
+              )}
             </div>
           </div>
           <div className="blog_info">

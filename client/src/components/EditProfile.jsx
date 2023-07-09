@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
 const EditProfile = ({ setShowEdit }) => {
   const { user } = useGlobalContext();

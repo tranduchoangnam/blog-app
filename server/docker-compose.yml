@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_db_container
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  api:
+    container_name: api_container
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
