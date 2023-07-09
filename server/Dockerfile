@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8000
 
 # Command to run our app
-CMD ["npm", "deploy"]
+CMD ["npm", "run", "deploy"]
