@@ -12,8 +12,7 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json and install dependencies
 COPY package*.json ./
-RUN npm install
-
+RUN npm install && npx prisma generate
 # Copy Prisma schema and generate Prisma client code
 
 
