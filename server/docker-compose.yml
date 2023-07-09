@@ -1,23 +1,32 @@
 version: "3.8"
 services:
   postgres:
-    image: postgres
+    image: postgres:15.3-alpine
     container_name: postgres_db_container
+    env_file:
+      - .env
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${DB_PORT}/${POSTGRES_DB}?schema=${DB_SCHEMA}
     ports:
-      - "5432:5432"
-    restart: unless-stopped
+      - 5432:5432
+    restart: always
+    networks:
+      - appdb
+
   api:
     container_name: api_container
     build: .
     env_file:
       - .env
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${DB_PORT}/${POSTGRES_DB}?schema=${DB_SCHEMA}
     ports:
       - "8000:8000"
+    networks:
+      - appdb
     depends_on:
       - postgres
+
+networks:
+  appdb:
+    driver: bridge
