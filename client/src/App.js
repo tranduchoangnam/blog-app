@@ -7,6 +7,8 @@ import {
   ProtectedRoute,
   UploadPage,
   FullBlogPage,
+  Following,
+  History,
 } from "./pages/index.js";
 import { useGlobalContext } from "./context";
 import Skeleton from "./components/Skeleton";
@@ -24,7 +26,6 @@ function App() {
       setIsLoading(false);
     } else fetchUser();
   }, []);
-
   if (isLoading) {
     return <Skeleton />;
   }
@@ -34,8 +35,24 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/blog" element={<FullBlogPage />}></Route>
+        <Route exact path="/blog/:blog_id" element={<FullBlogPage />}></Route>
         <Route path="/dashboard/:user_id" element={<Dashboard />}></Route>
+        <Route
+          path="/following"
+          element={
+            <ProtectedRoute>
+              <Following />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/history"
+          element={
+            <ProtectedRoute>
+              <History />
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route
           exact
           path="/upload"
@@ -52,7 +69,7 @@ function App() {
             <ProtectedRoute>
               <Navigate
                 to={user ? `/dashboard/${user.id}` : "/"}
-                replace={true}
+                replace="true"
                 element={<Dashboard />}
               ></Navigate>
             </ProtectedRoute>

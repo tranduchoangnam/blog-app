@@ -1,5 +1,6 @@
 import prisma from "../prisma/index.js";
 import { getMyBlogs } from "./blog.js";
+import { countFollower, countFollowing, checkFollowed } from "./follow.js";
 const createUser = async (data) => {
   let user = await prisma.user.create({
     data: {
@@ -26,10 +27,14 @@ const getUserProfile = async (req, res) => {
       id: req.params.user_id,
     },
   });
+  const userId = req.user ? req.user.id : "";
   let obj = {};
   obj.user = user;
   obj.blogs = await getMyBlogs(req.params.user_id);
-  console.log(obj);
+  obj.countFollower = await countFollower(req.params.user_id);
+  obj.countFollowing = await countFollowing(req.params.user_id);
+  obj.followed = await checkFollowed(userId, req.params.user_id);
+  // console.log(obj);
   res.send(obj);
 };
 

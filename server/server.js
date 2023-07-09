@@ -40,13 +40,12 @@ app.use(
 );
 
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "https://neural-cv.vercel.app");
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "*");
-//   res.setHeader("Access-Control-Allow-Credentials", "true");
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

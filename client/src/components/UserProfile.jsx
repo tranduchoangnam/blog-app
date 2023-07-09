@@ -3,9 +3,10 @@ import { useGlobalContext } from "../context";
 import EditProfile from "./EditProfile";
 import BlogList from "./BlogList";
 import { useState } from "react";
+
 const UserProfile = ({ user, blogs }) => {
   // const { user } = useGlobalContext();
-  const { showEdit, setShowEdit } = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   return (
     <>
@@ -24,7 +25,7 @@ const UserProfile = ({ user, blogs }) => {
             </button>
           </div>
         </div>
-        <BlogList blogs={blogs} preview={true} />
+        <BlogList blogs={blogs} type={{ preview: true, enable: true }} />
       </div>
       {showEdit && <EditProfile setShowEdit={setShowEdit} />}
     </>

@@ -24,7 +24,6 @@ const EditProfile = ({ setShowEdit }) => {
           ></i>
         </div>
       </div>
-      <div className="blog"></div>
     </div>
   );
 };

@@ -52,10 +52,10 @@ const Header = () => {
             </div>
             <div
               className="element log_out"
-              onClick={() => {
-                logoutUser();
-                navigate("/");
+              onClick={async () => {
+                await logoutUser();
                 setToggleLog(!toggleLog);
+                navigate("/");
               }}
             >
               <i className="bx bx-log-out"></i>

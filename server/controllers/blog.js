@@ -3,6 +3,9 @@ import { countShare } from "./share.js";
 import { countUpvote } from "./upvote.js";
 import { countDownvote } from "./downvote.js";
 import { countComment } from "./comment.js";
+import { countView } from "./history.js";
+import { getUser } from "./user.js";
+import { checkFollowed } from "./follow.js";
 const createBlog = async (data) => {
   const date = new Date().toLocaleString("sv-SE", {
     timeZone: "Asia/Ho_Chi_Minh",
@@ -17,21 +20,28 @@ const createBlog = async (data) => {
       userId: data.userId,
     },
   });
+  return;
 };
-const getBlog = async (blogId) => {
+const getBlog = async (blogId, userId) => {
   let blog = await prisma.blog.findUnique({
     where: {
       id: blogId,
     },
   });
+
   let obj = {
     blog: blog,
+    owner: await getUser(blog.userId),
     countUpvote: await countUpvote(blogId),
     countDownvote: await countDownvote(blogId),
     countShare: await countShare(blogId),
     countComment: await countComment(blogId),
+    countView: await countView(blogId),
   };
-  // console.log(obj);
+  if (userId) {
+    obj.followed = await checkFollowed(userId, blog.userId);
+  } else obj.followed = false;
+  // console.log({ userId: userId, flid: blog.userId, followed: obj.followed });
   return obj;
 };
 const getMyBlogs = async (userId) => {
@@ -47,7 +57,7 @@ const getMyBlogs = async (userId) => {
 
   let blogsObj = await Promise.all(
     blogs.map(async (blog) => {
-      return await getBlog(blog.id);
+      return await getBlog(blog.id, userId);
     })
   );
   return blogsObj;
@@ -59,9 +69,10 @@ const getNewestBlogs = async (req, res) => {
     },
     take: 18,
   });
+  const userId = req.user ? req.user.id : null;
   let blogsObj = await Promise.all(
     blogs.map(async (blog) => {
-      return await getBlog(blog.id);
+      return await getBlog(blog.id, userId);
     })
   );
   res.send(blogsObj);
@@ -70,11 +81,10 @@ const getNewestBlogs = async (req, res) => {
 const deleteBlog = async (req, res) => {
   let blog = await prisma.blog.delete({
     where: {
-      id: req.user.id,
-      blogId: req.params.blogId,
+      id: parseInt(req.params.blog_id),
     },
   });
-  return;
+  res.send("deleted");
 };
 const updateBlog = async (req, res) => {
   const date = new Date().toLocaleString("sv-SE", {

@@ -61,6 +61,7 @@ const upload = (req, res) => {
       userId: req.user.id,
     };
     await createBlog(data);
+    res.status(200).send({ message: "Upload successfully" }).end();
   });
 };
 export default upload;

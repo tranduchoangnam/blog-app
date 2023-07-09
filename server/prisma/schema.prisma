@@ -45,6 +45,7 @@ model Blog{
   history History[]
 }
 model Upvote{
+  date String
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
   blogId Int
@@ -52,6 +53,7 @@ model Upvote{
   @@id([userId,blogId])
 }
 model Downvote{
+  date String
   userId String
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
   blogId Int
@@ -93,7 +95,7 @@ model Follow{
   followerId  String
   following   User @relation("following", fields: [followingId], references: [id])
   followingId String
-
+  date String
   @@id([followerId, followingId])
 }
 

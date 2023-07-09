@@ -1,15 +1,16 @@
 import React from "react";
 import TextEditor from "./TextEditor";
 import TagsInput from "./TagsInput";
-import FullBlog from "./FullBlog";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import backendURL from "../utils/backendUrl";
 import { useToast } from "@hanseo0507/react-toast";
 import Blog from "./Blog";
+import { useGlobalContext } from "../context";
+
 const UploadPost = () => {
+  const { user } = useGlobalContext();
   const [contentData, setContentData] = useState("");
   const [title, setTitle] = useState("");
   const [tagsData, setTagsData] = useState([]);
@@ -39,10 +40,10 @@ const UploadPost = () => {
     formData.append("content", contentData);
     formData.append("tags", tagsData);
     formData.append("photo", photo);
-    const request = new XMLHttpRequest();
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    // const request = new XMLHttpRequest();
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
 
     axios
       .post(`${backendURL}/api/upload`, formData, {
@@ -50,15 +51,24 @@ const UploadPost = () => {
       })
       .then((response) => {
         console.log(response.data);
-        navigate("/dashboard");
+        setContentData("");
+        setTitle("");
+        setTagsData([]);
+        setPhoto(null);
+        toast.success("Post uploaded successfully");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
       .catch((error) => {
+        toast.error("Post uploaded failed");
         console.error(error);
       });
   };
   useEffect(() => {
     if (!photo) {
       setUrl(undefined);
+      console.log(url);
       return;
     }
 
@@ -79,7 +89,12 @@ const UploadPost = () => {
               onBlur={(e) => setTitle(e.target.value)}
             />
 
-            <button className="btn_post" onClick={() => submitForm()}>
+            <button
+              className="btn_post"
+              onClick={() => {
+                submitForm();
+              }}
+            >
               Post
             </button>
           </div>
@@ -97,9 +112,16 @@ const UploadPost = () => {
           </div>
           {/* <div dangerouslySetInnerHTML={{ __html: data }} /> */}
         </div>
-
-        <Blog title={title} imgSrc={url} preview={true} />
-        <Blog title={title} content={contentData} preview={false} />
+        <Blog
+          data={{
+            blog: {
+              title: title,
+              photo: url,
+            },
+            owner: user,
+          }}
+          type={{ preview: true, enable: false }}
+        />
       </div>
     </>
   );

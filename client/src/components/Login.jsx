@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import backendURL from "../utils/backendUrl";
-import PasswordAndConfirmPasswordValidation from "../services/PasswordAndConfirmPasswordValidation";
+import PasswordAndConfirmPasswordValidation from "../utils/PasswordAndConfirmPasswordValidation";
 const Login = ({ setLoginShow }) => {
   const [loginBox, setLoginBox] = useState(1);
   const handleShow = (e) => {

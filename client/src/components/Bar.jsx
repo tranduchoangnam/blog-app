@@ -18,13 +18,13 @@ const Bar = () => {
         <i className="bx bxs-home"></i>
         <p>Home</p>
       </div>
-      <div className="Following" onClick={() => handleClick("/")}>
+      <div className="Following" onClick={() => handleClick("/following")}>
         <i className="bx bxs-heart"></i>
         <p>Following</p>
       </div>
-      <div className="Explore" onClick={() => handleClick("/")}>
+      <div className="History" onClick={() => handleClick("/history")}>
         <i className="bx bxs-compass"></i>
-        <p>Explore</p>
+        <p>History</p>
       </div>
       <div className="Post" onClick={() => handleClick("/upload")}>
         <i className="bx bxs-message-add"></i>

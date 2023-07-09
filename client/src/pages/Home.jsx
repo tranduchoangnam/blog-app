@@ -6,8 +6,10 @@ import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
 import BlogList from "../components/BlogList";
+import { useNavigate } from "react-router-dom";
 function Home() {
   const [data, setData] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     document.title = "Blogee";
 
@@ -34,7 +36,7 @@ function Home() {
         <Header />
         <Bar />
         <div className="wrapper_right">
-          <BlogList blogs={data} preview={true} />
+          <BlogList blogs={data} type={{ preview: true, enable: true }} />
         </div>
       </div>
     </>
