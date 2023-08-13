@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import backendURL from "./utils/backendUrl";
 import Cookies from "js-cookie";
-
+axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 const UserContext = React.createContext();
 const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +15,7 @@ const UserProvider = ({ children }) => {
 
   const removeUser = () => {
     setUser(null);
+    localStorage.removeItem("token");
   };
 
   const fetchUser = async () => {
@@ -20,9 +23,9 @@ const UserProvider = ({ children }) => {
       const { data } = await axios.get(`${backendURL}/api/current_user`, {
         withCredentials: true,
       });
-      saveUser(data);
+      saveUser(data.user);
       Cookies.set("user", JSON.stringify(data));
-
+      localStorage.setItem("token", data.token);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -34,8 +37,10 @@ const UserProvider = ({ children }) => {
 
   const logoutUser = async () => {
     try {
-      await axios.delete(`${backendURL}/logout`, { withCredentials: true });
       removeUser();
+      await axios.delete(`${backendURL}/auth/signout`, {
+        withCredentials: true,
+      });
       Cookies.remove("user");
     } catch (error) {
       console.log(error);

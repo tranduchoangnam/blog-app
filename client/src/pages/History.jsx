@@ -5,7 +5,9 @@ import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
 import BlogList from "../components/BlogList";
-
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 function History() {
   const [data, setData] = useState();
 

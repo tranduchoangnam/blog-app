@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
-import Comment from "../components/Comment";
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 function FullBlogPage() {
   const params = useParams();
   const blog_id = params.blog_id;
@@ -41,7 +43,6 @@ function FullBlogPage() {
       ) : (
         <Skeleton />
       )}
-      <Comment blog_id={blog_id} />
     </div>
   );
 }

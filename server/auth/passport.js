@@ -40,7 +40,7 @@ passport.use(
         data.created_at = date;
         let newUser = await createUser(data);
         return done(null, newUser);
-      }
+      } else return done(null, undefined);
     }
   )
 );
@@ -93,10 +93,10 @@ passport.use(
 //   )
 // );
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  return done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   let user = await getUser(id);
-  done(null, user);
+  return done(null, user);
 });

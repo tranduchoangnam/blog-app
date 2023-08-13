@@ -12,6 +12,7 @@ const createUser = async (data) => {
       created_at: data.created_at,
     },
   });
+  return user;
 };
 const getUser = async (userId) => {
   let user = await prisma.user.findUnique({

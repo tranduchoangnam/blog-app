@@ -8,7 +8,9 @@ import backendURL from "../utils/backendUrl";
 import { useToast } from "@hanseo0507/react-toast";
 import Blog from "./Blog";
 import { useGlobalContext } from "../context";
-
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 const UploadPost = () => {
   const { user } = useGlobalContext();
   const [contentData, setContentData] = useState("");

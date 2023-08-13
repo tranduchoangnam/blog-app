@@ -510,6 +510,61 @@ input {
   align-items: center;
   padding: 10px;
 }
+.wrapper_comment {
+  display: flex;
+  padding: 20px;
+  width: 50%;
+  border: 1px solid black;
+  max-height: 300px;
+}
+.wrapper_comment .title {
+  border: none;
+  margin-bottom: 10px;
+}
+.card {
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.wrapper_comment .user_avatar {
+  margin-right: 10px;
+  margin-top: 40px;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+.comment {
+  display: flex;
+}
+.blog.full.comment {
+  padding: 10px;
+  position: relative;
+  width: 100px;
+}
+.title.comment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+textarea {
+  width: 350px;
+  height: 80px;
+  border: 1px solid var(--border-color);
+  /* box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.1); */
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 15px;
+  resize: none;
+}
+
+.title.comment .user_name {
+  width: 100px;
+  margin: 0;
+  margin-bottom: 10px;
+}
 
 @media screen and (max-width: 1250px) {
   .wrapper_left {
@@ -607,6 +662,12 @@ input {
   color: grey;
   border: 1px solid rgb(0, 255, 0);
   box-shadow: rgba(0, 255, 0, 0.8) 0px 0px 10px;
+}
+.highlight {
+  color: rgb(0, 255, 0);
+}
+.container_comment {
+  width: 100%;
 }
 @keyframes pulse {
   0% {

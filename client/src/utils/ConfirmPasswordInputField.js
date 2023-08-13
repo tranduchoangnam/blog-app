@@ -17,7 +17,7 @@ function ConfirmPasswordInputField({
           className="element log_sign"
         />
         <div className="text-danger">
-          {confirmPasswordError !== "" && <i class="bx bx-error"></i>}
+          {confirmPasswordError !== "" && <i className="bx bx-error"></i>}
           {confirmPasswordError}
         </div>
       </div>

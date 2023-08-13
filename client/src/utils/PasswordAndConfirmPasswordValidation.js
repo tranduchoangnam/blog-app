@@ -1,14 +1,13 @@
 import { useState } from "react";
 import PasswordInputField from "./PasswordInputField";
 import ConfirmPasswordInputField from "./ConfirmPasswordInputField";
-function PasswordAndConfirmPasswordValidation(props) {
+function PasswordAndConfirmPasswordValidation({ type, setPassword }) {
   const [passwordError, setPasswordErr] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [passwordInput, setPasswordInput] = useState({
     password: "",
     confirmPassword: "",
   });
-  const { type } = props;
   const handlePasswordChange = (evnt) => {
     const passwordInputValue = evnt.target.value.trim();
     const passwordInputFieldName = evnt.target.name;
@@ -54,6 +53,10 @@ function PasswordAndConfirmPasswordValidation(props) {
         errMsg = "";
       }
       setPasswordErr(errMsg);
+      if (!errMsg) {
+        // console.log(passwordInputValue);
+        setPassword(passwordInputValue);
+      }
     }
 
     // for confirm password
@@ -66,6 +69,7 @@ function PasswordAndConfirmPasswordValidation(props) {
         setConfirmPasswordError("Confirm password is not matched");
       } else {
         setConfirmPasswordError("");
+        console.log("1");
       }
     }
   };

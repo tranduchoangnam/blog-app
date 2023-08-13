@@ -5,11 +5,16 @@ import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
 import BlogList from "../components/BlogList";
+import { useGlobalContext } from "../context";
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 function Home() {
   const [data, setData] = useState();
+  const { user } = useGlobalContext();
   useEffect(() => {
     document.title = "Blogee";
-
+    console.log(user);
     const fetchData = async () => {
       try {
         const response = await axios.get(`${backendURL}/api/home`, {

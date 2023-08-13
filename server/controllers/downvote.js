@@ -1,17 +1,11 @@
 import { exists } from "fs-extra";
 import prisma from "../prisma/index.js";
+import { parse } from "path";
 const createDownvote = async (req, res) => {
   const date = new Date().toLocaleString("sv-SE", {
     timeZone: "Asia/Ho_Chi_Minh",
   });
-  let downvoted = await prisma.downvote.findUnique({
-    where: {
-      userId_blogId: {
-        userId: req.user.id,
-        blogId: parseInt(req.params.blog_id),
-      },
-    },
-  });
+  let downvoted = await checkDownvoted(req.params.blog_id, req.user.id);
   if (downvoted) {
     await deleteDownvote(req, res);
     return;
@@ -35,14 +29,7 @@ const countDownvote = async (blogId) => {
   return downvote;
 };
 const deleteDownvote = async (req, res) => {
-  let downvoted = await prisma.downvote.findUnique({
-    where: {
-      userId_blogId: {
-        userId: req.user.id,
-        blogId: parseInt(req.params.blog_id),
-      },
-    },
-  });
+  let downvoted = await checkDownvoted(req.params.blog_id, req.user.id);
   if (downvoted) {
     let downvote = await prisma.downvote.delete({
       where: {
@@ -55,4 +42,18 @@ const deleteDownvote = async (req, res) => {
   }
   return;
 };
-export { createDownvote, countDownvote, deleteDownvote };
+const checkDownvoted = async (blogId, userId) => {
+  let downvoted = await prisma.downvote.findUnique({
+    where: {
+      userId_blogId: {
+        userId: userId,
+        blogId: parseInt(blogId),
+      },
+    },
+  });
+  if (downvoted) {
+    return true;
+  }
+  return false;
+};
+export { createDownvote, countDownvote, deleteDownvote, checkDownvoted };

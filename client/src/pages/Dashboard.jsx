@@ -7,6 +7,9 @@ import axios from "axios";
 import backendURL from "../utils/backendUrl";
 import Skeleton from "../components/Skeleton";
 import { useParams } from "react-router-dom";
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 function Dashboard() {
   const [data, setData] = useState();
   const params = useParams();

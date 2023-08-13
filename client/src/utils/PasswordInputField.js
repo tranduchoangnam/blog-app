@@ -18,7 +18,7 @@ function PasswordInputField({
         />
 
         <div className="text-danger">
-          {passwordError !== "" && <i class="bx bx-error"></i>}
+          {passwordError !== "" && <i className="bx bx-error"></i>}
           {passwordError}
         </div>
       </div>

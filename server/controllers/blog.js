@@ -1,8 +1,8 @@
 import prisma from "../prisma/index.js";
 import { countShare } from "./share.js";
-import { countUpvote } from "./upvote.js";
-import { countDownvote } from "./downvote.js";
-import { countComment } from "./comment.js";
+import { countUpvote, checkUpvoted } from "./upvote.js";
+import { countDownvote, checkDownvoted } from "./downvote.js";
+import { countComment, getComments } from "./comment.js";
 import { countView } from "./history.js";
 import { getUser } from "./user.js";
 import { checkFollowed } from "./follow.js";
@@ -28,7 +28,12 @@ const getBlog = async (blogId, userId) => {
       id: blogId,
     },
   });
-
+  let voted = async (blogId, userId) => {
+    if (!userId) return 0;
+    if (await checkUpvoted(blogId, userId)) return 1;
+    if (await checkDownvoted(blogId, userId)) return -1;
+    return 0;
+  };
   let obj = {
     blog: blog,
     owner: await getUser(blog.userId),
@@ -37,6 +42,8 @@ const getBlog = async (blogId, userId) => {
     countShare: await countShare(blogId),
     countComment: await countComment(blogId),
     countView: await countView(blogId),
+    voted: await voted(blogId, userId),
+    comments: await getComments(blogId),
   };
   if (userId) {
     obj.followed = await checkFollowed(userId, blog.userId);

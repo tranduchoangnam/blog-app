@@ -79,6 +79,11 @@ model Comment{
   user User @relation(fields:[userId],references: [id],onDelete: Cascade)
   blogId Int
   blog Blog @relation(fields:[blogId],references: [id],onDelete: Cascade)
+  
+  parentCommentId Int?
+  parentComment Comment? @relation("reply",fields:[parentCommentId],references: [id],onDelete: Cascade)
+  reply Comment[] @relation("reply")
+
 }
 
 model History{

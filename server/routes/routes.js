@@ -28,6 +28,7 @@ import {
   deleteDownvote,
   countDownvote,
 } from "../controllers/downvote.js";
+import { createComment, deleteComment } from "../controllers/comment.js";
 import { createShare } from "../controllers/share.js";
 
 dotenv.config();
@@ -53,13 +54,9 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureMessage: "Cannot login to Google",
     successRedirect: successLoginUrl,
     failureRedirect: failureLoginUrl,
-  }),
-  (req, res) => {
-    // res.send("LoggedIn");
-  }
+  })
 );
 // router.get(
 //   "/auth/facebook",
@@ -99,7 +96,10 @@ router.get("/api/public_user/:userId", (req, res) => {
   res.json(getUser(req.params.userId));
 });
 
-router.post("/api/create_user", createUser);
+router.post("/api/create_user", async (req, res) => {
+  const user = await createUser(req.body);
+  res.json(user);
+});
 router.get("/api/update_user", isUserAuthenticated, updateUser);
 router.delete("/api/delete_user", isUserAuthenticated, deleteUser);
 router.get("/api/current_user", isUserAuthenticated, (req, res) => {
@@ -148,4 +148,6 @@ router.get(
 );
 router.get("/api/react/share/:blog_id", isUserAuthenticated, createShare);
 
+router.post("/api/create_comment/:blog_id", isUserAuthenticated, createComment);
+router.delete("/api/delete_comment", isUserAuthenticated, deleteComment);
 export { router };

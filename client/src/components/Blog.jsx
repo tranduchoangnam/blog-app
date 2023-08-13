@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleData, handleTitle } from "../utils/handleData.js";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context.js";
 import axios from "axios";
-import backendURL from "../utils/backendUrl";
+import backendURL from "../utils/backendUrl.js";
+import Comment from "./Comment.jsx";
+axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 const Blog = ({ data, type }) => {
   const [deleted, setDeleted] = useState(false);
   const [upvote, setUpvote] = useState(data.countUpvote);
   const [downvote, setDownvote] = useState(data.countDownvote);
+  const [voted, setVoted] = useState(data.voted);
   const [toggle, setToggle] = useState(false);
   const { user } = useGlobalContext();
   const navigate = useNavigate();
@@ -27,7 +32,8 @@ const Blog = ({ data, type }) => {
   const handleUpvote = async (type) => {
     if (!type.enable) return;
     if (!user) navigate("/login");
-
+    if (voted === 1) setVoted(0);
+    else setVoted(1);
     try {
       const response = await axios.get(
         `${backendURL}/api/react/upvote/${data.blog.id}`,
@@ -43,7 +49,8 @@ const Blog = ({ data, type }) => {
   const handleDownvote = async (type) => {
     if (!type.enable) return;
     if (!user) navigate("/login");
-
+    if (voted === -1) setVoted(0);
+    else setVoted(-1);
     try {
       const response = await axios.get(
         `${backendURL}/api/react/downvote/${data.blog.id}`,
@@ -125,11 +132,14 @@ const Blog = ({ data, type }) => {
               )}
             </div>
             <div className="blog_footer">
-              <i className="bx bxs-upvote" onClick={() => handleUpvote(type)}>
+              <i
+                className={`bx bxs-upvote ${voted === 1 && "highlight"}`}
+                onClick={() => handleUpvote(type)}
+              >
                 {upvote}
               </i>
               <i
-                className="bx bxs-downvote"
+                className={`bx bxs-downvote ${voted === -1 && "highlight"}`}
                 onClick={() => handleDownvote(type)}
               >
                 {downvote}

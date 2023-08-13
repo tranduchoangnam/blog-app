@@ -5,7 +5,9 @@ import axios from "axios";
 import backendURL from "../utils/backendUrl";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CommentBox from "./Comment";
 // import { useGlobalContext } from "../context";
+
 const FullBlog = ({ data, type }) => {
   const [toggle, setToggle] = useState(data.followed);
   const navigate = useNavigate();
@@ -28,7 +30,6 @@ const FullBlog = ({ data, type }) => {
   };
   const followButton = (
     <>
-      {" "}
       {toggle ? (
         <button
           className="btn_follow followed"
@@ -112,13 +113,8 @@ const FullBlog = ({ data, type }) => {
           <div className="time">Now</div>
         </div>
         <div className="content">{handleData(data.blog.content)}</div>
-
-        <div className="blog_footer">
-          <i className="bx bxs-upvote"></i>
-          <i className="bx bxs-downvote"></i>
-          <i className="bx bxs-comment-detail"></i>
-        </div>
       </div>
+      <CommentBox data={data} />;
     </div>
   );
 };
