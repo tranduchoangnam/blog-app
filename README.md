@@ -1,12 +1,16 @@
-# Getting Started with Create React App
+# Getting Started with Blogee App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a blog app using ReactJS, ExpressJS, PostgreSQL, Prisma ORM, Docker
 
-## Available Scripts
+## Available Scripts on local:
 
-In the project directory, you can run:
+#### In the client directory, you can run:
 
-### `npm start`
+### `npm install`
+
+Install package required in package.json
+
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,57 +18,84 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+#### In the server directory, you can run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm install`
 
-### `npm run build`
+Install package required in package.json
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npx prisma generate`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You'll need to manually re-generate Prisma Client to ensure the code inside node_modules/.prisma/client gets updated
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npx prisma migrate dev`
 
-### `npm run eject`
+Prisma Migrate generates a history of .sql migration files, and plays a role in both development and deployment.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `nodemon server`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Runs the app in the development mode.\
+Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The server will reload when you make changes.\
+You may also see any lint errors in the console.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Available Scripts using Docker:
 
-## Learn More
+This project's server is dockerized so in the server dir, you can run:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `docker-compose up -d`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This command will setup the environment on Docker so you dont need to install package in your computer
 
-### Code Splitting
+### `docker ps`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Check your container is running or not
+If everything is correct, your server should be available at
+[http://localhost:8000](http://localhost:8000)
 
-### Analyzing the Bundle Size
+# About Blogee
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This is my first personal project after took part in some group projects.
 
-### Making a Progressive Web App
+Actually in my previous group projects, I usually code backend so building this fullstack project in 2 weeks causes me a lot of challenges.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Using React Hooks is one of the most difficult and interesting problem I have to deal with. I also decide to use the original CSS instead of Bootstrap and TailwindCSS to practice and understand more clearly.
 
-### Advanced Configuration
+In my backend, I use ExpressJS with Oauth2 for login, Prisma ORM and PostgreSQL for database management. I have no trouble because of having experience on it.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+I will try to turn this project to React TypeScript version with TailwindCSS and use Laravel in Backend. But in present with my lack of time, this project is almost everything i have. I'm happy because this is my first Fullstack Project I have done.
 
-### Deployment
+#### Features:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Signin / SignUp
+- Write Post (support Rich Text Editor)
+- Read full blog
+- Follow User
+- History
+- See following user's Blog
+- Upvote / Downvote
+- Comment
+- Delete Post
 
-### `npm run build` fails to minify
+#### Thanks and happy coding!!!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Homepage
+
+<img width="882" alt="Screenshot 2023-07-11 at 12 40 20" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/cf242265-8616-4bef-b7ab-6f1cc1779f15">
+
+#### Login
+
+<img width="890" alt="Screenshot 2023-07-11 at 12 40 06" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/9f3901a0-9ca0-4188-8ff3-0108d8cd9624">
+
+#### Dashboard
+
+<img width="733" alt="Screenshot 2023-07-11 at 12 39 44" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/96b0c7b8-c79d-45a2-9438-68b8d87a09a3">
+
+#### Read Blog
+
+<img width="882" alt="Screenshot 2023-07-11 at 12 40 30" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/33e3b576-5412-47ae-9aaa-77fae4a0fefc">
+
+#### Write Blog
+
+<img width="888" alt="Screenshot 2023-07-11 at 12 40 38" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/5442edac-5dab-43fd-b559-86a165a5e16c">
