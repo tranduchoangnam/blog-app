@@ -77,25 +77,10 @@ I will try to turn this project to React TypeScript version with TailwindCSS and
 - Upvote / Downvote
 - Comment
 - Delete Post
+  
+#### Video demo
+
+https://drive.google.com/file/d/1-64HxlDOh1nYRWzxxdPVrwoFXy18y49j/view?usp=share_link
 
 #### Thanks and happy coding!!!
 
-#### Homepage
-
-<img width="882" alt="Screenshot 2023-07-11 at 12 40 20" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/cf242265-8616-4bef-b7ab-6f1cc1779f15">
-
-#### Login
-
-<img width="890" alt="Screenshot 2023-07-11 at 12 40 06" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/9f3901a0-9ca0-4188-8ff3-0108d8cd9624">
-
-#### Dashboard
-
-<img width="733" alt="Screenshot 2023-07-11 at 12 39 44" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/96b0c7b8-c79d-45a2-9438-68b8d87a09a3">
-
-#### Read Blog
-
-<img width="882" alt="Screenshot 2023-07-11 at 12 40 30" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/33e3b576-5412-47ae-9aaa-77fae4a0fefc">
-
-#### Write Blog
-
-<img width="888" alt="Screenshot 2023-07-11 at 12 40 38" src="https://github.com/tranduchoangnam/blog-app/assets/109036840/5442edac-5dab-43fd-b559-86a165a5e16c">
