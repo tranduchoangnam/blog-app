@@ -66,6 +66,9 @@ In my backend, I use ExpressJS with Oauth2 for login, Prisma ORM and PostgreSQL 
 
 I will try to turn this project to React TypeScript version with TailwindCSS and use Laravel in Backend. But in present with my lack of time, this project is almost everything i have. I'm happy because this is my first Fullstack Project I have done.
 
+Updated: Blogee is available with Laravel Backend and ReactJS Frontend
+https://github.com/tranduchoangnam/React_Laravel_Blogee.git
+
 #### Features:
 
 - Signin / SignUp
